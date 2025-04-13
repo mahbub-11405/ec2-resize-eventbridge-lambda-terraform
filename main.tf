@@ -23,7 +23,7 @@ module "lambda" {
 module "resize_to_large" {
   source      = "./modules/eventbridge"
   name        = "resize-to-large"
-  schedule    = "cron(0/10 * * * ? *)"
+  schedule    = "cron(0 1 25 * ? *)" # 1 AM on the 25th of every month
   lambda_arn  = module.lambda.lambda_arn
   lambda_name = module.lambda.lambda_name
   instance_id = module.ec2.instance_id
@@ -33,7 +33,7 @@ module "resize_to_large" {
 module "resize_to_small" {
   source      = "./modules/eventbridge"
   name        = "resize-to-small"
-  schedule    = "cron(5/10 * * * ? *)"
+  schedule    = "cron(0 1 5 * ? *)" # 1 AM on the 5th of every month
   lambda_arn  = module.lambda.lambda_arn
   lambda_name = module.lambda.lambda_name
   instance_id = module.ec2.instance_id
